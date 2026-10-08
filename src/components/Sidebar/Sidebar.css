@@ -1,0 +1,52 @@
+.sidebar {
+    padding: 12px 8px;
+    height: 100vh;
+    overflow: auto;
+    background-color: #171717;
+    color: #ececec;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+    font-size: 14px;
+}
+
+.sidebar svg {
+    width: 20px;
+    height: 20px;
+}
+
+#ham {
+    margin-left: 10px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.newchat {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    background-color: transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    background-color: rgb(82,85,86);
+}
+
+.recent {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.recent:hover,
+.newchat:hover {
+    background-color: #2f2f2f;
+}
