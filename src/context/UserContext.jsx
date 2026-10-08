@@ -4,15 +4,50 @@ import response from "../groq";
 export const dataContext = createContext();
 
 function UserContext({ children }) {
+  const [input, setInput] = useState("");
+  const [showResult, setShowResult] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
 
-  const sent = async(prompt) =>{
-    return await response(prompt)
-  }
+  const sent = async (prompt) => {
+    if (!prompt.trim()) return;
 
-  const [input,setInput] = useState("")
+    setShowResult(true);
+    setLoading(true);
 
-  const data = {sent,input,setInput}
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "user",
+        content: prompt,
+      },
+    ]);
 
+    setInput("");
+
+    try {
+      const reply = await response(prompt);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          content: reply,
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const data = {
+    sent,
+    input,
+    setInput,
+    showResult,
+    loading,
+    messages,
+  };
 
   return (
     <dataContext.Provider value={{ data }}>

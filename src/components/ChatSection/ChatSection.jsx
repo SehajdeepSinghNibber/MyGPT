@@ -5,28 +5,77 @@ import { useContext } from "react";
 import { dataContext } from "../../context/UserContext";
 
 const ChatSection = () => {
-
-  let {data} = useContext(dataContext)
+  const { data } = useContext(dataContext);
 
   return (
     <div className="chat-section">
-      <div className="top-section">
-        <div className="headings">
-          <span>HELLO USER</span>
-          <span>WELCOME TO MYGPT</span>
-          <span>HOW CAN I HELP YOU...?</span>
+      {!data.showResult ? (
+        <div className="top-section">
+          <div className="headings">
+            <span>HELLO USER</span>
+            <span>WELCOME TO MYGPT</span>
+            <span>HOW CAN I HELP YOU...?</span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="result-section">
+          {data.messages.map((message, index) => (
+            <div
+              className={
+                message.role === "user"
+                  ? "user-message"
+                  : "ai-message"
+              }
+              key={index}
+            >
+              <div
+                className={
+                  message.role === "user"
+                    ? "user-avatar"
+                    : "ai-avatar"
+                }
+              >
+                {message.role === "user" ? "U" : "AI"}
+              </div>
+
+              <div
+                className={
+                  message.role === "user"
+                    ? "user-question"
+                    : "ai-response"
+                }
+              >
+                {message.content}
+              </div>
+            </div>
+          ))}
+
+          {data.loading && (
+            <div className="ai-message">
+              <div className="ai-avatar">AI</div>
+              <div className="ai-response">Loading...</div>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="bottom-section">
-        <input type="text" placeholder="Ask MyGPT" onChange={(e)=>{data.setInput(e.target.value)}} value={data.input}/>
-        <button onClick={async ()=>{
-          data.setInput("")
-          const reply = await(data.sent(data.input))
-          console.log(reply)
-        }}>
+        <input
+          type="text"
+          placeholder="Ask MyGPT"
+          onChange={(e) => data.setInput(e.target.value)}
+          value={data.input}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              data.sent(data.input);
+            }
+          }}
+        />
+
+        <button onClick={() => data.sent(data.input)}>
           <LuSendHorizontal />
         </button>
+
         <ToggleBtn />
       </div>
     </div>
