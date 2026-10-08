@@ -1,16 +1,87 @@
-# React + Vite
+# MyGPT
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A simple React + Vite chat-style interface powered by a Groq/OpenAI-compatible API. The app includes a sidebar, separation panel, chat section, and a reusable AI response helper.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Minimal chat UI layout
+- Sidebar with expand/collapse interaction
+- Dark/light mode toggle
+- API integration through a reusable `response` function
+- Vite-based frontend setup for quick local development
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- OpenAI Node SDK
+- React Icons
 
-## Expanding the Oxlint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+mygpt/
+├── src/
+│   ├── App.jsx
+│   ├── gemini.js
+│   ├── index.css
+│   ├── main.jsx
+│   ├── components/
+│   │   ├── ChatSection/
+│   │   ├── Seperation/
+│   │   ├── Sidebar/
+│   │   └── ToggleBtn/
+│   └── context/
+│       └── UserContext.jsx
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+## Getting Started
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a `.env` file in the project root and add your API key:
+
+```bash
+VITE_GROQ_API_KEY=your_api_key_here
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+4. Open the local URL shown in the terminal, usually:
+
+```bash
+http://localhost:5173
+```
+
+## Build
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+## Preview
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Notes
+
+- The AI call is defined in `src/gemini.js` and uses the Groq/OpenAI-compatible endpoint.
+- The app is currently a front-end UI prototype and can be extended with chat input handling, message state, and conversation history.
