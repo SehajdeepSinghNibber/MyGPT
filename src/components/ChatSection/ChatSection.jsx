@@ -72,9 +72,9 @@ const ChatSection = () => {
           }}
         />
 
-        <button onClick={() => data.sent(data.input)}>
+        {input?<button onClick={() => data.sent(data.input)}>
           <LuSendHorizontal />
-        </button>
+        </button>:""}
 
         <ToggleBtn />
       </div>
